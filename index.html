@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+    <style>
+        body {
+            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f8f9fa;
+        }
+
+        .container-fluid {
+            font-weight: bold;
+        }
+
+        .menu-card {
+            background-color: #ffffff;
+            border: none;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            width: 100%;
+            text-align: left;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .menu-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(32, 201, 151, 0.05) 0%, rgba(32, 201, 151, 0.1) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 0;
+        }
+
+        .menu-card:hover::before {
+            opacity: 1;
+        }
+
+        .menu-card > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .menu-card img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease;
+        }
+
+        .menu-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .menu-card-content {
+            flex: 1;
+        }
+
+        .menu-card h5 {
+            margin: 0 0 5px 0;
+            font-weight: 600;
+            color: #2c3e50;
+            font-size: 1.1rem;
+        }
+
+        .menu-card p {
+            margin: 0;
+            font-weight: 700;
+            color: #20c997;
+            font-size: 1.1rem;
+        }
+
+        .hero {
+            position: relative;
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+            background: url('https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?auto=format&fit=crop&w=1470&q=80') center/cover no-repeat;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.55);
+            z-index: 0;
+        }
+
+        .hero .container {
+            position: relative;
+            z-index: 1;
+            max-width: 700px;
+        }
+
+        .hero h1 {
+            font-weight: 700;
+            font-size: 3.2rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            font-family: 'Georgia', serif;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+        }
+
+        .hero p.lead {
+            font-size: 1.3rem;
+            font-style: italic;
+            font-weight: 300;
+            letter-spacing: 0.8px;
+            text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.6);
+        }
+
+        .menu-section {
+            padding: 40px 0;
+            position: relative;
+            background: url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1470&q=80') center/cover no-repeat;
+            color: #333;
+        }
+
+        .menu-section::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: rgba(248, 249, 250, 0.95);
+            z-index: 0;
+        }
+
+        .menu-section > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .menu-card:hover,
+        .menu-card:focus {
+            outline: none;
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        footer {
+            background-color: rgba(52, 58, 64, 0.9);
+            color: white;
+            padding: 40px 0;
+        }
+
+        .social-icons a {
+            color: white;
+            margin: 0 15px;
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+
+        .social-icons a:hover,
+        .social-icons a:focus {
+            color: #20c997;
+            outline: none;
+        }
+
+        .search-input {
+            max-width: 400px;
+            margin: 0 auto 40px auto;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        /* Image loading placeholder */
+        .menu-card img {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+        }
+
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        .menu-card img[src] {
+            animation: none;
+            background: none;
+        }
+    </style>
+</head>
+
+<body>
+    <section class="hero">
+        <div class="container">
+            <h1>Experience Culinary Excellence</h1>
+            <p class="lead">Savor the finest flavors crafted with passion and perfection.</p>
+        </div>
+    </section>
+
+    <section class="menu-section container" aria-label="Menu section">
+        <input type="search" aria-label="Search menu items" id="searchInput" class="form-control search-input"
+            placeholder="Search menu items..." />
+
+        <h2 class="section-title">🍔 Fast Food</h2>
+        <div class="row" id="fastfood">
+            <div class="col-md-6 col-lg-4 mb-4">
+                <button class="menu-card" aria-label="Burger, price 120 rupees"
+                    onclick="showDetails('Burger', 'Delicious grilled burger with lettuce and tomato.', 120)">
+                    <img src="burger.jpg" alt="Burger">
+                    <div class="menu-card-content">
+                        <h5>Burger</h5>
+                        <p>₹120</p>
+                    </div>
+                </button>
+            </div>
+            <div class="col-md-6 col-lg-4 mb-4">
+                <button class="menu-card" aria-label="Pizza, price 250 rupees"
+                    onclick="showDetails('Pizza', 'Cheesy Margherita Pizza with Italian herbs.', 250)">
+                    <img src="pizza.jpg" alt="Pizza">
+                    <div class="menu-card-content">
+                        <h5>Pizza</h5>
+                        <p>₹250</p>
+                    </div>
+                </button>
+            </div>
+            <div class="col-md-6 col-lg-4 mb-4">
+                <button class="menu-card" aria-label="Fries, price 80 rupees"
+                    onclick="showDetails('Fries', 'Crispy golden French fries.', 80)">
+                    <img src="fries.jpg" alt="Fries">
+                    <div class="menu-card-content">
+                        <h5>Fries</h5>
+                        <p>₹80</p>
+                    </div>
+                </button>
+            </div>
+            <div class="col-md-6 col-lg-4 mb-4">
+                <button class="menu-card" aria-label="Momos, price 100 rupees"
+                    onclick="showDetails('Momos', 'Steamed dumplings served with spicy chutney.', 100)">
+                    <img src="momos.jpg" alt="Momos">
+                    <div class="menu-card-content">
+                        <h5>Momos</h5>
+                        <p>₹100</p>
+                    </div>
+                </button>
+            </div>
+            <div class="col-md-6 col-lg-4 mb-4">
+                <button class="menu-card" aria-label="Wrap, price 150 rupees"
+                    onclick="showDetails('Wrap', 'Spicy chicken wrap with fresh veggies.', 150)">
+                    <img src="wraps.jpg" alt="Wrap">
+                    <div class="menu-card-content">
+                        <h5>Wrap</h5>
+                        <p>₹150</p>
+                    </div>
+                </button>
+            </div>
+            <div class="col-md-6 col-lg-4 mb-4">
+                <button class="menu-card" aria-label="Hot Dog, price 110 rupees"
+                    onclick="showDetails('Hot Dog', 'Grilled hot dog with mustard and ketchup.', 110)">
+                    <img src="hotdog.jpg" alt="Hot Dog">
+                    <div class="menu-card-content">
+                        <h5>Hot Dog</h5>
+                        <p>₹110</p>
+                    </div>
+                </button>
+            </div>
+        </div>
+
+        <h2 class="section-title">🍰 Desserts</h2>
+        <div class="row" id="desserts">
+            <div class="col-md-6 col-lg-4 mb-4">
+                <button class="menu-card" aria-label="Chocolate Cake, price 90 rupees"
+                    onclick="showDetails('Chocolate Cake', 'Rich chocolate layered cake.', 90)">
+                    <img src="cake.jpg" alt="Chocolate Cake">
+                    <div class="menu-card-content">
+                        <h5>Chocolate Cake</h5>
+                        <p>₹90</p>
+                    </div>
+                </button>
+            </div>
+            <div class="col-md-6 col-lg-4 mb-4">
+                <button class="menu-card" aria-label="Gulab Jamun, price 60 rupees"
+                    onclick="showDetails('Gulab Jamun', 'Soft and juicy Indian sweet.', 60)">
+                    <img src="gulabjamun.jpg" alt="Gulab Jamun">
+                    <div class="menu-card-content">
+                        <h5>Gulab Jamun</h5>
+                        <p>₹60</p>
+                    </div>
+                </button>
+            </div>
+            <div class="col-md-6 col-lg-4 mb-4">
+                <button class="menu-card" aria-label="Ice Cream, price 70 rupees"
+                    onclick="showDetails('Ice Cream', 'Vanilla ice cream with choco chips.', 70)">
+                    <img src="icecream.jpg" alt="Ice Cream">
+                    <div class="menu-card-content">
+                        <h5>Ice Cream</h5>
+                        <p>₹70</p>
+                    </div>
+                </button>
+            </div>
+            <div class="col-md-6 col-lg-4 mb-4">
+                <button class="menu-card" aria-label="Brownie, price 100 rupees"
+                    onclick="showDetails('Brownie', 'Warm brownie with hot chocolate sauce.', 100)">
+                    <img src="browni.jpg" alt="Brownie">
+                    <div class="menu-card-content">
+                        <h5>Brownie</h5>
+                        <p>₹100</p>
+                    </div>
+                </button>
+            </div>
+            <div class="col-md-6 col-lg-4 mb-4">
+                <button class="menu-card" aria-label="Rasgulla, price 50 rupees"
+                    onclick="showDetails('Rasgulla', 'Bengali delight soaked in syrup.', 50)">
+                    <img src="rasgulla.jpg" alt="Rasgulla">
+                    <div class="menu-card-content">
+                        <h5>Rasgulla</h5>
+                        <p>₹50</p>
+                    </div>
+                </button>
+            </div>
+            <div class="col-md-6 col-lg-4 mb-4">
+                <button class="menu-card" aria-label="Cheesecake, price 120 rupees"
+                    onclick="showDetails('Cheesecake', 'Creamy cheesecake with a graham cracker crust.', 120)">
+                    <img src="cheesecake.jpg" alt="Cheesecake">
+                    <div class="menu-card-content">
+                        <h5>Cheesecake</h5>
+                        <p>₹120</p>
+                    </div>
+                </button>
+            </div>
+        </div>
+
+        <h2 class="section-title">🥤 Drinks</h2>
+        <div class="row" id="drinks">
+            <div class="col-md-6 col-lg-4 mb-4">
+                <button class="menu-card" aria-label="Coke, price 40 rupees"
+                    onclick="showDetails('Coke', 'Chilled Coca-Cola bottle.', 40)">
+                    <img src="coke.jpg" alt="Coke">
+                    <div class="menu-card-content">
+                        <h5>Coke</h5>
+                        <p>₹40</p>
+                    </div>
+                </button>
+            </div>
+            <div class="col-md-6 col-lg-4 mb-4">
+                <button class="menu-card" aria-label="Lassi, price 60 rupees"
+                    onclick="showDetails('Lassi', 'Sweet Punjabi lassi.', 60)">
+                    <img src="lassi.jpg" alt="Lassi">
+                    <div class="menu-card-content">
+                        <h5>Lassi</h5>
+                        <p>₹60</p>
+                    </div>
+                </button>
+            </div>
+            <div class="col-md-6 col-lg-4 mb-4">
+                <button class="menu-card" aria-label="Lemonade, price 30 rupees"
+                    onclick="showDetails('Lemonade', 'Fresh lemon soda.', 30)">
+                    <img src="lemand.jpg" alt="Lemonade">
+                    <div class="menu-card-content">
+                        <h5>Lemonade</h5>
+                        <p>₹30</p>
+                    </div>
+                </button>
+            </div>
+            <div class="col-md-6 col-lg-4 mb-4">
+                <button class="menu-card" aria-label="Cold Coffee, price 90 rupees"
+                    onclick="showDetails('Cold Coffee', 'Chilled creamy cold coffee.', 90)">
+                    <img src="coldcoffee.jpg" alt ="Cold Coffee">
+                    <div class="menu-card-content">
+                        <h5>Cold Coffee</h5>
+                        <p>₹90</p>
+                    </div>
+                </button>
+            </div>
+            <div class="col-md-6 col-lg-4 mb-4">
+                <button class="menu-card" aria-label="Mango Shake, price 120 rupees"
+                    onclick="showDetails('Mango Shake', 'Refreshing mango shake.', 120)">
+                    <img src="mangosake.jpg" alt="Mango Shake">
+                    <div class="menu-card-content">
+                        <h5>Mango Shake</h5>
+                        <p>₹120</p>
+                    </div>
+                </button>
+            </div>
+            <div class="col-md-6 col-lg-4 mb-4">
+                <button class="menu-card" aria-label="Masala Chai, price 40 rupees"
+                    onclick="showDetails('Masala Chai', 'Spiced Indian tea.', 40)">
+                    <img src="masalachai.jpg" alt="Masala Chai">
+                    <div class="menu-card-content">
+                        <h5>Masala Chai</h5>
+                        <p>₹40</p>
+                    </div>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <footer class="text-center">
+        <div class="container">
+            <p class="mb-2">Follow us on:</p>
+            <div class="social-icons">
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            </div>
+            <p class="mt-3">📞 Contact: +91-9616363246 | 🆘 Help Center</p>
+        </div>
+    </footer>
+
+    <div class="modal fade" id="itemModal" tabindex="-1" aria-labelledby="itemModalLabel" aria-modal="true"
+        role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="itemModalLabel">Item Name</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p id="itemDescription"></p>
+                    <p><strong>Price: ₹<span id="itemPrice"></span></strong></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showDetails(name, description, price) {
+            document.getElementById('itemModalLabel').innerText = name;
+            document.getElementById('itemDescription').innerText = description;
+            document.getElementById('itemPrice').innerText = price;
+            const modalEl = document.getElementById('itemModal');
+            const modal = new bootstrap.Modal(modalEl);
+            modal.show();
+        }
+
+        document.getElementById('searchInput').addEventListener('input', function () {
+            const filter = this.value.toLowerCase();
+
+            ['fastfood', 'desserts', 'drinks'].forEach(sectionId => {
+                const section = document.getElementById(sectionId);
+                Array.from(section.children).forEach(col => {
+                    const btn = col.querySelector('button.menu-card');
+                    const name = btn.querySelector('h5').innerText.toLowerCase();
+                    if (name.includes(filter)) {
+                        col.style.display = '';
+                    } else {
+                        col.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
